@@ -29,19 +29,17 @@ var main = new UI.Menu({
 
 main.show();
 
-main.on('select', function(e) {
-	console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
-	console.log('The item is titled "' + e.item.title + '"');
-	console.log('Pebble Account Token: ' + Pebble.getAccountToken());
-	console.log('Pebble Watch Token: ' + Pebble.getWatchToken());
-	  
+main.on('select', function(e) {  
 	// Request current position
-	navigator.geolocation.getCurrentPosition(success, error, options);
+	navigator.geolocation.getCurrentPosition(function(pos) {
+		console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
+		console.log('The item is titled "' + e.item.title + '"');
+		console.log('Pebble Account Token: ' + Pebble.getAccountToken());
+		console.log('Pebble Watch Token: ' + Pebble.getWatchToken());
+		console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
+	}, error, options);
 });
 
-function success(pos) {
-  console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
-}
 
 function error(err) {
   console.log('location error (' + err.code + '): ' + err.message);
