@@ -1,7 +1,8 @@
 {
     "appKeys": {},
     "capabilities": [
-        ""
+        "location",
+        "configurable"
     ],
     "companyName": "ricecake@tfm.nu",
     "longName": "cloudHook",
@@ -33,6 +34,11 @@
     },
     "sdkVersion": "3",
     "shortName": "cloudHook",
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk"
+    ],
     "uuid": "0eca8275-54bc-4918-b737-79af9b9c2614",
     "versionCode": 1,
     "versionLabel": "1.0",
