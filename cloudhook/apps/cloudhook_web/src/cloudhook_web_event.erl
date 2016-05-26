@@ -28,5 +28,5 @@ get_message(#{ <<"lat">> := Lat, <<"lon">> := Lon, <<"time">> := Time} = Args) -
 		"From: Sebastian Green-Husted",
 		string:concat("To: ", string:join(Recipients, ", ")),
 		"",
-		binary_to_list(<<$@, Time/binary, ": ", Lat/binary, ", ", Lon/binary>>)
+		io_lib:format("@~w: ~w, ~w", [Time, Lat, Lon])
 	], "\r\n").
