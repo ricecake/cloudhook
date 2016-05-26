@@ -13,12 +13,13 @@ init(Req, Args) ->
 	Event = jsx:decode(Body, [return_maps]),
 	{Recipient, Opts} = get_recipient(Event),
 	Message = get_message(Event),
-	_Res = gen_smtp_client:send_blocking({?FROM, Recipient, Message}, Opts),
+	Res = gen_smtp_client:send_blocking({?FROM, Recipient, Message}, Opts),
+	io:format("~p~n", [{Event, Res}]),
 	{ok, cowboy_req:reply(204, Req2), Args}.
 
 get_recipient(#{ <<"type">> := <<"Context A">> }) -> {["ricecake@tfm.nu"], [{relay, "mail.tfm.nu"}]};
-get_recipient(#{ <<"type">> := <<"Context B">> }) -> {["geoffcake@gmail.com"], [{relay, "smtp.gmail.com"}]};
-get_recipient(#{ <<"type">> := <<"Context C">> }) -> {["farlateal@gmail.com"], [{relay, "smtp.gmail.com"}]};
+get_recipient(#{ <<"type">> := <<"Context B">> }) -> {["geoffcake@gmail.com"], [{relay, "gmail-smtp-in.l.google.com"}]};
+get_recipient(#{ <<"type">> := <<"Context C">> }) -> {["farlateal@gmail.com"], [{relay, "gmail-smtp-in.l.google.com"}]};
 get_recipient(#{ <<"type">> := _ }) -> {["ricecake@tfm.nu"], [{relay, "mail.tfm.nu"}]}.
 
 get_message(#{ <<"lat">> := Lat, <<"lon">> := Lon, <<"time">> := Time} = Args) ->
