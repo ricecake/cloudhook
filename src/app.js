@@ -39,8 +39,9 @@ main.on('select', function(e) {
 		console.log('Pebble Watch Token: ' + Pebble.getWatchToken());
 		console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
 		ajax({
-			url: 'https://cloudhook.tfm.nu/api/event',
-			type: 'json',
+			url:    'https://cloudhook.tfm.nu/api/event',
+			type:   'json',
+			method: 'post',
 			data: {
 				account: Pebble.getAccountToken(),
 				source:  Pebble.getWatchToken(),
