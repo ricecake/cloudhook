@@ -1,16 +1,19 @@
-{application, cloudhook_web,
- [{description, "An OTP application"},
-  {vsn, "0.1.0"},
-  {registered, []},
-  {mod, { cloudhook_web_app, []}},
-  {applications,
-   [kernel,
-    stdlib
-   ]},
-  {env,[]},
-  {modules, []},
-
-  {maintainers, []},
-  {licenses, []},
-  {links, []}
- ]}.
+{application, cloudhook_web, [
+	{description, "An OTP application"},
+	{vsn, "0.1.0"},
+	{registered, []},
+	{mod, { cloudhook_web_app, []}},
+	{applications, [
+		kernel,
+		stdlib,
+		lager,
+		cowboy,
+		erlydtl,
+		jsx
+	]},
+	{env,[]},
+	{modules, []},
+	{maintainers, []},
+	{licenses, []},
+	{links, []}
+]}.
