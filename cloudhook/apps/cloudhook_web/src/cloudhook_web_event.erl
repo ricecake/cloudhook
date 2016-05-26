@@ -17,10 +17,11 @@ init(Req, Args) ->
 	io:format("~p~n", [{Event, Res}]),
 	{ok, cowboy_req:reply(204, Req2), Args}.
 
-get_recipient(#{ <<"type">> := <<"Context A">> }) -> {["ricecake@tfm.nu"], [{relay, "mail.tfm.nu"}]};
-get_recipient(#{ <<"type">> := <<"Context B">> }) -> {["geoffcake@gmail.com"], [{relay, "gmail-smtp-in.l.google.com"}]};
-get_recipient(#{ <<"type">> := <<"Context C">> }) -> {["farlateal@gmail.com"], [{relay, "gmail-smtp-in.l.google.com"}]};
-get_recipient(#{ <<"type">> := _ }) -> {["ricecake@tfm.nu"], [{relay, "mail.tfm.nu"}]}.
+get_recipient(#{ <<"type">> := <<"Context A">> }) -> {["ricecake@tfm.nu"],     application:get_env(cloudhook_web, smtp_opts, [{relay, "mail.tfm.nu"}])};
+get_recipient(#{ <<"type">> := <<"Context B">> }) -> {["geoffcake@gmail.com"], application:get_env(cloudhook_web, smtp_opts, [{relay, "gmail-smtp-in.l.google.com"}])};
+get_recipient(#{ <<"type">> := <<"Context C">> }) -> {["farlateal@gmail.com"], application:get_env(cloudhook_web, smtp_opts, [{relay, "gmail-smtp-in.l.google.com"}])};
+get_recipient(#{ <<"type">> := _ }) ->               {["ricecake@tfm.nu"],     application:get_env(cloudhook_web, smtp_opts, [{relay, "mail.tfm.nu"}])}.
+
 
 get_message(#{ <<"lat">> := Lat, <<"lon">> := Lon, <<"time">> := Time} = Args) ->
 	{Recipients, _} = get_recipient(Args),
