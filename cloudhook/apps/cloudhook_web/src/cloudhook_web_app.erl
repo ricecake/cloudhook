@@ -1,9 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc cloudhook public API
+%% @doc cloudhook_web public API
 %% @end
 %%%-------------------------------------------------------------------
 
--module(cloudhook_app).
+-module(cloudhook_web_app).
 
 -behaviour(application).
 
@@ -15,7 +15,7 @@
 %%====================================================================
 
 start(_StartType, _StartArgs) ->
-    cloudhook_sup:start_link().
+    cloudhook_web_sup:start_link().
 
 %%--------------------------------------------------------------------
 stop(_State) ->

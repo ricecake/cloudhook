@@ -1,9 +1,9 @@
 %%%-------------------------------------------------------------------
-%% @doc cloudhook top level supervisor.
+%% @doc cloudhook_web top level supervisor.
 %% @end
 %%%-------------------------------------------------------------------
 
--module(cloudhook_sup).
+-module(cloudhook_web_sup).
 
 -behaviour(supervisor).
 
