@@ -10,8 +10,8 @@ var ajax = require('ajax');
 // Choose options about the data returned
 var options = {
 	enableHighAccuracy: true,
-	maximumAge: 10000,
-	timeout: 10000
+	maximumAge: 30000,
+	timeout: 15000
 };
 
 var main = new UI.Menu({
@@ -33,11 +33,6 @@ main.show();
 main.on('select', function(e) {
 	// Request current position
 	navigator.geolocation.getCurrentPosition(function(pos) {
-		console.log('Selected item #' + e.itemIndex + ' of section #' + e.sectionIndex);
-		console.log('The item is titled "' + e.item.title + '"');
-		console.log('Pebble Account Token: ' + Pebble.getAccountToken());
-		console.log('Pebble Watch Token: ' + Pebble.getWatchToken());
-		console.log('lat= ' + pos.coords.latitude + ' lon= ' + pos.coords.longitude);
 		ajax({
 			url:    'https://cloudhook.tfm.nu/api/event',
 			type:   'json',
