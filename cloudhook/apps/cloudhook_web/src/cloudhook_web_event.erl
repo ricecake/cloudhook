@@ -7,14 +7,11 @@
 -define(FROM, "ricecake@tfm.nu").
 
 init(Req, Args) ->
-	%{Addr, _Port} = cowboy_req:peer(Req),
-	%_IP = list_to_binary(inet_parse:ntoa(Addr)),
 	{ok, Body, Req2} = cowboy_req:body(Req),
 	Event = jsx:decode(Body, [return_maps]),
 	{Recipient, Opts} = get_recipient(Event),
 	Message = get_message(Event),
 	Res = gen_smtp_client:send_blocking({?FROM, Recipient, Message}, Opts),
-	io:format("~p~n", [{Event, Res}]),
 	{ok, cowboy_req:reply(204, Req2), Args}.
 
 get_recipient(#{ <<"type">> := <<"Context A">> }) -> {["ricecake@tfm.nu"],     application:get_env(cloudhook_web, smtp_opts, [{relay, "mail.tfm.nu"}])};
