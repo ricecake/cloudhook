@@ -12,7 +12,7 @@ init(Req, Args) ->
 	{Recipient, Opts} = get_recipient(Event),
 	Message = get_message(Event),
 	Res = gen_smtp_client:send_blocking({?FROM, Recipient, Message}, Opts),
-	{ok, cowboy_req:reply(204, [], jsx:encode(#{ res => Res }), Req2), Args}.
+	{ok, cowboy_req:reply(200, [], jsx:encode(#{ res => Res }), Req2), Args}.
 
 get_recipient(#{ <<"type">> := <<"Context A">> }) -> {["ricecake@tfm.nu"],     application:get_env(cloudhook_web, smtp_opts, [{relay, "mail.tfm.nu"}])};
 get_recipient(#{ <<"type">> := <<"Context B">> }) -> {["geoffcake@gmail.com"], application:get_env(cloudhook_web, smtp_opts, [{relay, "gmail-smtp-in.l.google.com"}])};
