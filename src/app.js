@@ -14,6 +14,10 @@ var options = {
 	timeout: 15000
 };
 
+var card = new UI.Card({
+	title:'Sending...'
+});
+
 var main = new UI.Menu({
 	sections: [{
 		items: [{
@@ -31,7 +35,9 @@ var main = new UI.Menu({
 main.show();
 
 main.on('select', function(e) {
+	card.show();
 	// Request current position
+	console.log('Sending Message');
 	navigator.geolocation.getCurrentPosition(function(pos) {
 		ajax({
 			url:    'https://cloudhook.tfm.nu/api/event',
@@ -47,13 +53,21 @@ main.on('select', function(e) {
 			}
 		}, function(data) {
 				console.log('Sent Event and got response');
+				main.show();
+				card.hide();
+		}, function(error) {
+				console.log('Sent Event and got error');
+				main.show();
+				card.hide();
 		});
 	}, error, options);
 });
 
 
 function error(err) {
-  console.log('location error (' + err.code + '): ' + err.message);
+	console.log('location error (' + err.code + '): ' + err.message);
+	main.show();
+	card.hide();
 }
 
 
