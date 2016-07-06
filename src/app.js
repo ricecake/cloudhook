@@ -49,11 +49,7 @@ main.on('select', function(e) {
 				console.log('Sent Event and got response');
 				main.show();
 				card.hide();
-		}, function(error) {
-				console.log('Sent Event and got error');
-				main.show();
-				card.hide();
-		});
+		}, error);
 	}, error, options);
 });
 
