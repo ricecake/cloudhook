@@ -47,8 +47,7 @@ main.on('select', function(e) {
 			}
 		}, function(data) {
 				console.log('Sent Event and got response');
-				main.show();
-				card.hide();
+				restoreMainScreen();
 		}, error);
 	}, error, options);
 });
@@ -56,8 +55,10 @@ main.on('select', function(e) {
 
 function error(err) {
 	console.log('location error (' + err.code + '): ' + err.message);
+	restoreMainScreen();
+}
+
+function restoreMainScreen() {
 	main.show();
 	card.hide();
 }
-
-
